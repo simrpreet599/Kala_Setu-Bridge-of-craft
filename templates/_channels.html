@@ -1,0 +1,2 @@
+<div class="grid g2">{% for c in chans %}<div class="card"><h3>{{ c.name }}</h3><span class="pill">{{ c.type }}</span><p>{{ c.why }}</p>
+<b>Typically needed:</b><ul>{% for r in c.typically_needed %}<li>{{ r }}</li>{% endfor %}</ul><p class="muted">{{ c.note }}</p><a class="btn ghost" target="_blank" rel="noopener" href="{{ c.url }}">Open official site ↗</a></div>{% endfor %}</div>

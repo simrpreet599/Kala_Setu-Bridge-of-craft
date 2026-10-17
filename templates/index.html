@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block body %}
+<div class="card" style="background:linear-gradient(135deg,var(--teal),var(--teal2));color:#fff;border:0">
+<h1 style="color:#fff">{{ T.tagline }}</h1><p>Speak about your product in your language. KalaSetu cleans the photo, writes a Hindi + English listing, suggests a fair price and shows who may buy.</p></div>
+<div class="grid g2"><form class="card" method="post" action="/register"><h2>Register (free)</h2>
+<label>Name</label><input name="name" required><label>Mobile number</label><input name="phone" inputmode="numeric" maxlength="14" required>
+<label>State</label><select name="state">{% for s in states %}<option>{{ s }}</option>{% endfor %}</select>
+<label>District / village</label><input name="district"><label>Your craft</label><select name="craft">{% for k,v in CATS.items() %}<option value="{{ k }}">{{ v.en }}</option>{% endfor %}</select>
+<label>Cooperative / SHG / NGO (optional)</label><input name="group_name"><label>Speaking language</label><select name="language">{% for k,v in langs.items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select>
+<label style="font-weight:400"><input type="checkbox" name="consent" value="1" style="width:auto"> I agree that my name, craft and location may appear on my public catalogue. My phone number stays private.</label><br>
+<button class="btn big">Register</button></form>
+<form class="card" method="post" action="/login"><h2>Sign in</h2><label>Mobile number</label><input name="phone" inputmode="numeric" required><br><button class="btn teal">Sign in</button>
+<p class="muted">Prototype note: sign-in uses the phone number only. A production version needs OTP verification.</p></form></div>{% endblock %}

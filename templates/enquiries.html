@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block body %}<h1>{{ T.enq }}</h1><div class="card"><table><tr><th>Product</th><th>Buyer</th><th>Contact</th><th>Qty</th><th>Message</th></tr>
+{% for e in rows %}<tr><td>{{ e.title_en }}</td><td>{{ e.buyer_name }}</td><td>{{ e.buyer_contact }}</td><td>{{ e.quantity }}</td><td>{{ e.message }}</td></tr>
+{% else %}<tr><td colspan="5">No enquiries yet. Share your catalogue link to get started.</td></tr>{% endfor %}</table></div>{% endblock %}

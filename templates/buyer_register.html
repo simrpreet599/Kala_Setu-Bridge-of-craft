@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Buyer registration{% endblock %}{% block body %}<h1>Buyers: source directly from artisans</h1>
+<form class="card" method="post"><div class="grid g2"><div><label>Your name</label><input name="name" required></div><div><label>Business / organisation</label><input name="org"></div>
+<div><label>Buyer type</label><select name="buyer_type"><option>Retailer</option><option>Wholesaler</option><option>Exporter</option><option>Institutional</option><option>Designer / brand</option></select></div>
+<div><label>Phone or email</label><input name="contact" required></div><div><label>States you source from (comma separated, or All India)</label><input name="regions" value="All India"></div>
+<div><label>Minimum order</label><input name="min_order"></div></div><label>Categories</label><div class="row">{% for k,v in CATS.items() %}<label style="font-weight:400"><input type="checkbox" name="categories" value="{{ k }}" style="width:auto"> {{ v.en }}</label>{% endfor %}</div><br><button class="btn">Register</button></form>{% endblock %}

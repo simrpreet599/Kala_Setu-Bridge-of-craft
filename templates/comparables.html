@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}Comparable prices{% endblock %}{% block body %}<h1>Comparable listings</h1>
+<p class="muted">Prices of similar handmade products observed on public listings. Add the source link and date. Entries stay UNVERIFIED until a reviewer checks the source; only verified entries raise price-suggestion confidence.</p>
+<form class="card" method="post"><div class="grid g3"><div><label>Category</label><select name="category">{% for k,v in CATS.items() %}<option value="{{ k }}">{{ v.en }}</option>{% endfor %}</select></div>
+<div><label>Listed price (₹)</label><input name="price" type="number" required></div><div><label>Date observed</label><input name="observed_on" type="date"></div></div>
+<label>Description</label><input name="description"><label>Source link</label><input name="source_url"><br><button class="btn">Add</button></form>
+<div class="card"><table><tr><th>Category</th><th>₹</th><th>Source</th><th>Status</th></tr>{% for r in rows %}<tr><td>{{ CATS[r.category].en }}</td><td>{{ r.price|inr }}</td><td>{{ r.source_url or r.description }}</td>
+<td>{% if r.is_demo %}<span class="pill demo">DEMO</span>{% elif r.verified %}<span class="pill ok">Verified</span>{% else %}<span class="pill warn">Unverified</span>{% endif %}</td></tr>{% endfor %}</table></div>{% endblock %}

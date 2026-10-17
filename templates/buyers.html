@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Find buyers{% endblock %}{% block body %}<h1>{{ T.buyers }}</h1>
+{% if not prods %}<div class="card">Publish a product first to see matching buyers and channels.</div>{% else %}
+<form class="card row" method="get"><label style="margin:0">Product</label><select name="product" onchange="this.form.submit()" style="max-width:360px">{% for p in prods %}<option value="{{ p.id }}" {{ 'selected' if sel and sel.id==p.id }}>{{ p.title_en }}</option>{% endfor %}</select></form>
+<h2>Registered buyers</h2><p class="muted">Buyers who registered on KalaSetu. "Unverified" = not yet checked by our team. Contact details are released only after you receive an enquiry from them.</p>
+<div class="grid g2">{% for b in ranked %}<div class="card"><h3>{{ b.name }} {% if b.verified %}<span class="pill ok">Verified</span>{% else %}<span class="pill warn">Unverified</span>{% endif %}{% if b.is_demo %} <span class="pill demo">DEMO</span>{% endif %}</h3>
+<div class="muted">{{ b.org }} · {{ b.buyer_type }} · Min order: {{ b.min_order or '—' }}</div><p>{% for r in b.reasons %}<span class="pill">{{ r }}</span> {% endfor %}</p></div>
+{% else %}<div class="card">No registered buyers match this craft yet. Use the official channels below.</div>{% endfor %}</div>
+<h2>Official channels for this craft</h2>{% include "_channels.html" %}{% endif %}{% endblock %}

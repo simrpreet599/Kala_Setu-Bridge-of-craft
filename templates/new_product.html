@@ -1,0 +1,37 @@
+{% extends "base.html" %}{% block title %}Add product{% endblock %}{% block body %}
+<h1>{{ T.add }}</h1><div class="steps" id="steps"><i class="on"></i><i></i><i></i><i></i></div>
+
+<section class="card" id="s1"><h2>1 · Photo 📷</h2><p class="muted">Place the product on a plain cloth or wall, near a window. One product per photo.</p>
+<input type="file" id="photo" accept="image/*" capture="environment"><label>Background</label>
+<select id="bg"><option value="white">White (marketplace standard)</option><option value="ivory">Ivory</option></select><br>
+<button class="btn teal" id="btnEnh">✨ Improve photo</button><div id="enhOut" class="hide"><div class="compare"><div><b>Before</b><img id="imgBefore"></div><div><b>After</b><img id="imgAfter"></div></div>
+<div id="enhWarn"></div><p class="muted" id="enhMetrics"></p></div><br><button class="btn" id="to2" disabled>Next →</button> <button class="btn ghost" id="skip1">Skip photo</button></section>
+
+<section class="card hide" id="s2"><h2>2 · Describe 🎤</h2><p class="muted">Press the mic and tell us: what it is, material, colour, size, material cost, days of work, your price. Works best in Chrome. You can also type.</p>
+<label>Language</label><select id="lang">{% for k,v in langs.items() %}<option value="{{ k }}" {{ 'selected' if k==me.language }}>{{ v }}</option>{% endfor %}</select>
+<div class="row" style="margin:10px 0"><button class="big-mic" id="mic" type="button" aria-label="Speak">🎤</button><span class="muted" id="micMsg">Tap to speak</span></div>
+<textarea id="speech" placeholder="e.g. यह लाल सूती साड़ी है, हथकरघे पर बनी, 6 मीटर, धागे की लागत 800 रुपये, 5 दिन लगे"></textarea>
+<label>Story / special detail (optional)</label><input id="story" placeholder="e.g. Natural dyes used; design from my grandmother's pattern"><br>
+<button class="btn teal" id="btnCat">Create listing</button>
+<div id="catOut" class="hide"><h3>Check the details</h3><div id="missing"></div>
+<div class="grid g3"><div><label>Product</label><select id="f_item"><option value="">—</option>{% for k,v in opts['items'].items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select></div>
+<div><label>Material</label><select id="f_material"><option value="">—</option>{% for k,v in opts['materials'].items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select></div>
+<div><label>Colour</label><select id="f_color"><option value="">—</option>{% for k,v in opts['colors'].items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select></div>
+<div><label>Technique</label><select id="f_technique"><option value="">—</option>{% for k,v in opts['techniques'].items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select></div>
+<div><label>Size</label><input id="f_dimensions"></div></div>
+<button class="btn ghost" id="btnRegen" type="button">↻ Update text from details</button>
+<label>Title (English)</label><input id="t_en"><label>Title (हिन्दी)</label><input id="t_hi">
+<label>Description (English)</label><textarea id="d_en"></textarea><label>Description (हिन्दी)</label><textarea id="d_hi"></textarea>
+<p class="muted">Draft made by templates from the facts above. Please read and correct it before publishing.</p><button class="btn" id="to3">Next →</button></div></section>
+
+<section class="card hide" id="s3"><h2>3 · Price ₹</h2><p class="muted">Enter your costs. We suggest a range. <b>This is a suggestion, not a verified market price.</b></p>
+<div class="grid g3"><div><label>Material cost (₹)</label><input id="p_mat" type="number" min="0"></div><div><label>Hours of work</label><input id="p_hrs" type="number" min="0"></div>
+<div><label>Your hourly wage (₹/hr)</label><input id="p_rate" type="number" value="100" min="0"></div><div><label>Profit margin (%)</label><input id="p_margin" type="number" value="20"></div></div>
+<p class="muted" id="hrsNote"></p><button class="btn teal" id="btnPrice">Suggest price</button>
+<div id="priceOut" class="hide"><div class="card" style="background:var(--ivory)"><div class="muted" id="pLabel"></div><div class="row"><div><div class="muted">Cost floor</div><b id="pFloor"></b></div><div><div class="muted">Suggested range</div><b id="pRange"></b></div>
+<div><div class="muted">Wholesale (B2B)</div><b id="pWhole"></b></div><div><span class="pill warn" id="pConf"></span></div></div><div id="pNotes"></div></div>
+<label>Your selling price (₹) — you decide</label><input id="p_final" type="number" min="1"><br><button class="btn" id="to4">Next →</button></div></section>
+
+<section class="card hide" id="s4"><h2>4 · Publish 🚀</h2><div id="summary"></div><button class="btn big" id="btnPub">Publish listing</button><p class="muted" id="pubMsg"></p></section>
+{% endblock %}
+{% block script %}<script src="{{ url_for('static', filename='app.js') }}"></script>{% endblock %}

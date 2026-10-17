@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block body %}
+<h1>Namaste, {{ me.name }} 🙏</h1>
+<div class="grid g3"><div class="card"><div class="stat">{{ n_p }}</div>Products listed</div><div class="card"><div class="stat">{{ n_e }}</div>Buyer enquiries</div>
+<div class="card"><a class="btn big" href="/products/new">＋ {{ T.add }}</a></div></div>
+<div class="card"><h3>Your shareable catalogue</h3><p class="muted">Send this link on WhatsApp to buyers:</p>
+<input readonly value="{{ request.url_root }}c/{{ me.id }}" onclick="this.select()"><br><br>
+<a class="btn teal" target="_blank" href="https://wa.me/?text={{ (request.url_root ~ 'c/' ~ me.id) | urlencode }}">Share on WhatsApp</a></div>{% endblock %}

@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}{{ a.name }}{% endblock %}{% block body %}
+<h1>{{ a.name }}</h1><p class="muted">{{ a.district }}, {{ a.state }} · {{ CATS[a.craft].en if a.craft in CATS }}{% if a.group_name %} · {{ a.group_name }}{% endif %}</p>
+<div class="grid g3">{% for p in rows %}<a href="/p/{{ p.id }}" style="text-decoration:none;color:inherit"><div class="card">{% if p.enhanced_image %}<img class="thumb" src="/uploads/{{ p.enhanced_image }}" alt="{{ p.title_en }}">{% endif %}
+<h3>{{ p.title_en }}</h3><div>{{ p.price_set|inr }}</div></div></a>{% else %}<div class="card">No products published yet.</div>{% endfor %}</div>{% endblock %}

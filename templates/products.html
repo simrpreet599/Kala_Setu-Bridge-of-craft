@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block body %}<h1>{{ T.mine }}</h1>
+{% if not rows %}<div class="card">No products yet. <a href="/products/new">Add your first product</a>.</div>{% endif %}
+<div class="grid g3">{% for p in rows %}<div class="card">{% if p.enhanced_image %}<img class="thumb" src="/uploads/{{ p.enhanced_image }}" alt="">{% endif %}
+<h3>{{ p.title_hi if ui=='hi' and p.title_hi else p.title_en }}</h3><div>{{ p.price_set|inr }} <span class="pill warn">suggested-based</span></div><br>
+<a class="btn ghost" href="/p/{{ p.id }}">View</a> <a class="btn ghost" href="/buyers?product={{ p.id }}">Find buyers</a></div>{% endfor %}</div>{% endblock %}

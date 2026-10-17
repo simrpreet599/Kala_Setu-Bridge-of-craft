@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}{{ p.title_en }}{% endblock %}{% block body %}
+<div class="grid g2"><div>{% if p.enhanced_image %}<img class="thumb" src="/uploads/{{ p.enhanced_image }}" alt="{{ p.title_en }}">{% endif %}</div>
+<div><h1>{{ p.title_en }}</h1><p class="muted">{{ p.title_hi }}</p><div class="stat">{{ p.price_set|inr }}</div>
+<p class="muted">Price set by the artisan{% if p.price_label %} (guided by a suggestion, not a verified market price){% endif %}.</p>
+<p>{{ p.desc_en }}</p><p lang="hi">{{ p.desc_hi }}</p>
+<p class="muted">By <a href="/c/{{ p.artisan_id }}">{{ a.name }}</a>, {{ a.district }}, {{ a.state }}</p></div></div>
+<form class="card" method="post" action="/p/{{ p.id }}/enquire"><h3>Enquire / request a bulk quote</h3>
+<div class="grid g2"><div><label>Your name / business</label><input name="buyer_name" required></div><div><label>Phone or email</label><input name="buyer_contact" required></div>
+<div><label>Quantity</label><input name="quantity"></div></div><label>Message</label><textarea name="message"></textarea><br><button class="btn">Send enquiry</button></form>{% endblock %}

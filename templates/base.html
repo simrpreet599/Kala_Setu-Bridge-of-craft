@@ -1,0 +1,9 @@
+<!doctype html><html lang="{{ 'hi' if ui=='hi' else 'en' }}"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>{% block title %}KalaSetu{% endblock %} · KalaSetu</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body>
+<header><div class="bar"><a class="brand" href="/">Kala<span>Setu</span> <small style="font-weight:400;font-size:.7rem;opacity:.8">कलासेतु</small></a>
+<nav>{% if me %}<a href="/products/new">{{ T.add }}</a><a href="/products">{{ T.mine }}</a><a href="/buyers">{{ T.buyers }}</a><a href="/enquiries">{{ T.enq }}</a><a href="/channels">{{ T.channels }}</a><a href="/logout">{{ T.logout }}</a>{% else %}<a href="/channels">{{ T.channels }}</a><a href="/buyers/register">For buyers</a>{% endif %}
+<a href="/ui/{{ 'hi' if ui=='en' else 'en' }}">{{ 'हिन्दी' if ui=='en' else 'English' }}</a></nav></div><div class="border"></div></header>
+<main>{% for m in get_flashed_messages() %}<div class="flash">{{ m }}</div>{% endfor %}{% block body %}{% endblock %}</main>
+<footer>KalaSetu prototype · Suggested prices are guidance, not verified market prices · Demo data is labelled DEMO.</footer>
+{% block script %}{% endblock %}</body></html>
